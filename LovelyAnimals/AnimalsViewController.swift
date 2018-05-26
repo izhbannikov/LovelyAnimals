@@ -8,11 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class AnimalsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        title = "Lovely animals"
     }
 
     override func didReceiveMemoryWarning() {
