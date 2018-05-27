@@ -6,4 +6,19 @@
 //  Copyright © 2018 Home. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class WebViewController: UIViewController, UIWebViewDelegate {
+    @IBOutlet var webView: UIWebView!
+    
+    var url: NSURL!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        webView = UIWebView(frame: UIScreen.mainScreen().bounds)
+        webView.delegate = self
+        view.addSubview(webView)
+        webView.loadRequest(NSURLRequest(URL: url))
+    }
+    
+}
