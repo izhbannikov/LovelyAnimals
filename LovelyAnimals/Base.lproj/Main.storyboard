@@ -109,8 +109,17 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="I2r-v2-lgL">
                                 <rect key="frame" x="20" y="20" width="560" height="580"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hzF-c4-S2r">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hzF-c4-S2r">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="290"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tVf-MN-ffo"/>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="tVf-MN-ffo" firstAttribute="top" secondItem="hzF-c4-S2r" secondAttribute="top" id="BQP-GY-QJi"/>
+                                            <constraint firstItem="tVf-MN-ffo" firstAttribute="leading" secondItem="hzF-c4-S2r" secondAttribute="leading" id="LvO-TG-7YL"/>
+                                            <constraint firstAttribute="bottom" secondItem="tVf-MN-ffo" secondAttribute="bottom" id="ctk-xh-wya"/>
+                                            <constraint firstAttribute="trailing" secondItem="tVf-MN-ffo" secondAttribute="trailing" id="twJ-uG-K0R"/>
+                                        </constraints>
                                     </scrollView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e3c-VS-akm">
                                         <rect key="frame" x="0.0" y="290" width="560" height="290"/>
@@ -129,6 +138,9 @@
                             <constraint firstItem="I2r-v2-lgL" firstAttribute="top" secondItem="TLw-EY-ZmG" secondAttribute="bottom" id="yY9-Je-2uD"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="tVf-MN-ffo" id="gUL-ur-5rz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="57S-G6-3cH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

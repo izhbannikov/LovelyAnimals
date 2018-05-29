@@ -9,7 +9,7 @@
 import Foundation
 
 class DataManager {
-    var animals: [String:[String]]
+    var animals: [String:[String: [String]]]
     
     struct Static {
         static var onceToken : dispatch_once_t = 0
@@ -25,14 +25,14 @@ class DataManager {
     
     init() {
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        if let animalsInfo = userDefaults.valueForKey("animals") as? [String:[String]] {
+        if let animalsInfo = userDefaults.valueForKey("animals") as? [String:[String: [String]]] {
             animals = animalsInfo
         } else {
             // add default data
             animals = [
-                "Foxes": ["Red fox", "Grey fox", "Fennec fox", "Bat-eared fox", "Arctic fox"],
-                "Wolfes" : ["Grey wolf"],
-                "Dogs" : ["Spaniel"]
+                "Foxes": ["Red fox" : [], "Grey fox": [], "Fennec fox":[], "Bat-eared fox":[], "Arctic fox": []],
+                "Wolfes" : ["Grey wolf": []],
+                "Dogs" : ["Spaniel": []]
             ]
         }
     }
@@ -43,20 +43,25 @@ class DataManager {
             list.append(name)
         }
         
-        list.sortInPlace(<)
+        //list.sortInPlace(<)
         
         return list
     }
-    
     
     func saveData() {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         userDefaults.setValue(animals, forKey: "animals")
     }
     
-    func addSpecies(species inSpecies: String, newSpecies: String) {
+    func addSpecies(species inSpecies: String, newSpecies: [String: [String]]) {
         if var species = animals[inSpecies] {
-            species.append(newSpecies)
+            if(newSpecies[newSpecies.keys.first!] != nil) {
+                species[newSpecies.keys.first!] = newSpecies[newSpecies.keys.first!]
+            } else {
+                species[newSpecies.keys.first!] = []
+            }
+            
+            //species.append(newSpecies)
             animals[inSpecies] = species
         }
         
@@ -65,17 +70,8 @@ class DataManager {
     
     func removeSpecies(species inSpecies: String, race inRace: String) {
         if var species = animals[inSpecies] {
-            var index = -1
-            
-            for (idx, race) in species.enumerate() {
-                if race == inRace {
-                    index = idx
-                    break
-                }
-            }
-            
-            if index != -1 {
-                species.removeAtIndex(index)
+            if species[inRace] != nil {
+                species.removeValueForKey(inRace)
                 animals[inSpecies] = species
                 saveData()
             }
@@ -89,6 +85,8 @@ class DataManager {
         
         return NSURL(string: "http://en.wikipedia.org/wiki/" + safeString)!
     }
+    
+    // Methods for saving images
     
     
 }

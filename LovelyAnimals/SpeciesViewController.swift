@@ -10,7 +10,7 @@ import UIKit
 
 protocol AddScreenViewControllerDelegate
 {
-    func onAddSpecies(type: String)
+    func onAddSpecies(type: [String: [String]])
 }
 
 class SpeciesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddScreenViewControllerDelegate {
@@ -18,7 +18,11 @@ class SpeciesViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet var tableView: UITableView!
     
     var species: [String] {
-        return DataManager.sharedInstance.animals[animals]!
+        var list: [String] = []
+        for name in DataManager.sharedInstance.animals[animals]!.keys {
+            list.append(name)
+        }
+        return list
     }
     
     override func viewDidLoad() {
@@ -56,7 +60,7 @@ class SpeciesViewController: UIViewController, UITableViewDataSource, UITableVie
         //}
     }
     
-    func onAddSpecies(data: String)
+    func onAddSpecies(data: [String: [String]])
     {
         DataManager.sharedInstance.addSpecies(species: self.animals, newSpecies: data)
         
@@ -83,6 +87,9 @@ class SpeciesViewController: UIViewController, UITableViewDataSource, UITableVie
         let url = DataManager.urlForRace(race)
         
         detailsViewController.race = race
+        if DataManager.sharedInstance.animals[animals]![race]?.count != 0 {
+            detailsViewController.imageFileName = DataManager.sharedInstance.animals[animals]![race]![0]
+        }
         detailsViewController.url = url
         
         navigationController?.pushViewController(detailsViewController, animated: true)
