@@ -17,8 +17,17 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         super.viewDidLoad()
         webView = UIWebView(frame: UIScreen.mainScreen().bounds)
         webView.delegate = self
+        self.webView.scalesPageToFit = true
+        self.webView.contentMode = .ScaleAspectFit
         view.addSubview(webView)
+        
         webView.loadRequest(NSURLRequest(URL: url))
     }
     
+    /*func webViewDidFinishLoad(webView: UIWebView) {
+        self.webView.scrollView.minimumZoomScale = 1.0
+        self.webView.scrollView.maximumZoomScale = 5.0
+        self.webView.stringByEvaluatingJavaScriptFromString("document.querySelector('meta[name=viewport]').setAttribute('content', 'user-scalable = 1;', false); ")
+    }*/
+
 }

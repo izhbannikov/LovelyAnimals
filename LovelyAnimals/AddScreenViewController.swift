@@ -11,6 +11,7 @@ import Photos
 
 class AddScreenViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var animals: String!
+    var speciesName: String!
     @IBOutlet var tfNewName: UITextField!
     var delegate:AddScreenViewControllerDelegate! = nil
     let imagePicker = UIImagePickerController()
@@ -21,8 +22,18 @@ class AddScreenViewController: UIViewController, UIImagePickerControllerDelegate
     override func viewDidLoad() {
     
         super.viewDidLoad()
+        
     
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         imagePicker.delegate = self
+        if self.speciesName != nil {
+            self.tfNewName.text = speciesName
+        }
     }
 
 
@@ -45,9 +56,9 @@ class AddScreenViewController: UIViewController, UIImagePickerControllerDelegate
  */
 
     @IBAction func cancelButtonTapped(sender_: UIBarButtonItem) {
-    
-        self.dismissViewControllerAnimated(true, completion: nil)
-
+        if((self.presentingViewController) != nil){
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
 
 
@@ -75,12 +86,11 @@ class AddScreenViewController: UIViewController, UIImagePickerControllerDelegate
         if (info[UIImagePickerControllerOriginalImage] as? UIImage) != nil {
             if let imageURL = info[UIImagePickerControllerReferenceURL] as? NSURL {
                 self.imageName.text = imageURL.path!
-            }
- 
-        }
+            }        }
         
         dismissViewControllerAnimated(true, completion: nil)
         
     }
+    
 }
 

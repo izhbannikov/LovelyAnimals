@@ -106,41 +106,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="I2r-v2-lgL">
-                                <rect key="frame" x="20" y="20" width="560" height="580"/>
-                                <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hzF-c4-S2r">
-                                        <rect key="frame" x="0.0" y="0.0" width="560" height="290"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tVf-MN-ffo"/>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="tVf-MN-ffo" firstAttribute="top" secondItem="hzF-c4-S2r" secondAttribute="top" id="BQP-GY-QJi"/>
-                                            <constraint firstItem="tVf-MN-ffo" firstAttribute="leading" secondItem="hzF-c4-S2r" secondAttribute="leading" id="LvO-TG-7YL"/>
-                                            <constraint firstAttribute="bottom" secondItem="tVf-MN-ffo" secondAttribute="bottom" id="ctk-xh-wya"/>
-                                            <constraint firstAttribute="trailing" secondItem="tVf-MN-ffo" secondAttribute="trailing" id="twJ-uG-K0R"/>
-                                        </constraints>
-                                    </scrollView>
-                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e3c-VS-akm">
-                                        <rect key="frame" x="0.0" y="290" width="560" height="290"/>
-                                        <connections>
-                                            <segue destination="8St-ju-AMK" kind="embed" id="MoR-EL-MdF"/>
-                                        </connections>
-                                    </containerView>
-                                </subviews>
-                            </stackView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e3c-VS-akm">
+                                <rect key="frame" x="20" y="10" width="560" height="580"/>
+                                <connections>
+                                    <segue destination="8St-ju-AMK" kind="embed" id="MoR-EL-MdF"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="I2r-v2-lgL" secondAttribute="trailing" id="QaM-4s-1dJ"/>
-                            <constraint firstItem="I2r-v2-lgL" firstAttribute="leading" secondItem="nST-Pu-Fus" secondAttribute="leadingMargin" id="m1h-HI-peA"/>
-                            <constraint firstItem="eEb-2g-JCs" firstAttribute="top" secondItem="I2r-v2-lgL" secondAttribute="bottom" id="r6G-Os-klY"/>
-                            <constraint firstItem="I2r-v2-lgL" firstAttribute="top" secondItem="TLw-EY-ZmG" secondAttribute="bottom" id="yY9-Je-2uD"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="imageView" destination="tVf-MN-ffo" id="gUL-ur-5rz"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="57S-G6-3cH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -155,40 +129,31 @@
                         <viewControllerLayoutGuide type="bottom" id="kGH-sB-Ygk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1sx-di-AFz">
-                        <rect key="frame" x="0.0" y="0.0" width="560" height="290"/>
+                        <rect key="frame" x="0.0" y="0.0" width="560" height="580"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ND-CH-QCl">
-                                <rect key="frame" x="20" y="0.0" width="520" height="290"/>
-                                <subviews>
-                                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cWf-9u-ZHR">
-                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" id="6ps-GT-XcX"/>
-                                            <constraint firstAttribute="height" id="spm-xc-hwm"/>
-                                        </constraints>
-                                    </webView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="cWf-9u-ZHR" firstAttribute="top" secondItem="2ND-CH-QCl" secondAttribute="top" id="2LY-sr-l5o"/>
-                                    <constraint firstAttribute="trailing" secondItem="cWf-9u-ZHR" secondAttribute="trailing" id="7vz-dp-nFI"/>
-                                    <constraint firstItem="cWf-9u-ZHR" firstAttribute="leading" secondItem="2ND-CH-QCl" secondAttribute="leading" id="IJT-X0-Q1y"/>
-                                    <constraint firstAttribute="bottom" secondItem="cWf-9u-ZHR" secondAttribute="bottom" id="Ps7-DN-R8H"/>
-                                </constraints>
-                            </scrollView>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cWf-9u-ZHR">
+                                <rect key="frame" x="20" y="0.0" width="520" height="580"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="OxA-u9-Q80" appends="YES" id="FUv-S0-Bx9"/>
+                                </connections>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="2ND-CH-QCl" secondAttribute="trailing" id="5Q5-cw-VHG"/>
-                            <constraint firstItem="2ND-CH-QCl" firstAttribute="leading" secondItem="1sx-di-AFz" secondAttribute="leadingMargin" id="Mym-Q1-pLu"/>
-                            <constraint firstItem="kGH-sB-Ygk" firstAttribute="top" secondItem="2ND-CH-QCl" secondAttribute="bottom" id="dpU-p0-Q4g"/>
-                            <constraint firstItem="2ND-CH-QCl" firstAttribute="top" secondItem="3y5-ZP-7zy" secondAttribute="bottom" id="qzN-oH-MYc"/>
+                            <constraint firstItem="cWf-9u-ZHR" firstAttribute="leading" secondItem="1sx-di-AFz" secondAttribute="leadingMargin" id="OeC-lz-bLb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cWf-9u-ZHR" secondAttribute="trailing" id="XSA-RN-LRb"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="cWf-9u-ZHR" secondAttribute="bottom" id="dif-a6-emC"/>
+                            <constraint firstItem="cWf-9u-ZHR" firstAttribute="top" secondItem="1sx-di-AFz" secondAttribute="topMargin" id="lmc-HN-Arq"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zPi-UK-hnI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="OxA-u9-Q80"/>
             </objects>
-            <point key="canvasLocation" x="-565" y="2477"/>
+            <point key="canvasLocation" x="-556" y="2689"/>
         </scene>
         <!--Add Screen View Controller-->
         <scene sceneID="Ne8-jj-8tj">

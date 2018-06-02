@@ -19,10 +19,10 @@ class SpeciesDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let image = loadImage(imageFileName)
+        /*let image = loadImage(imageFileName)
         if(image != nil) {
             self.imageView.image = image//UIImage(data: self.imageFileName)
-        }
+        }*/
         //self.imageView.image = UIImage(data: self.imageFileName)
     }
     
@@ -40,12 +40,14 @@ class SpeciesDetailsViewController: UIViewController {
         
         
         if NSFileManager.defaultManager().fileExistsAtPath(fileName!) {
-            let url = NSURL(string: fileName!)
-            let data = NSData(contentsOfURL: url!)
+            //let url = NSURL(string: fileName!)
+            let url: NSURL = NSURL(fileURLWithPath: fileName!)
+            let data = NSData(contentsOfURL: url)
             return(UIImage(data: data!))
         } else {
             return(nil)
         }
     }
-
+    
+    
 }

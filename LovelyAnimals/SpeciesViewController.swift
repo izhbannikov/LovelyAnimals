@@ -30,6 +30,13 @@ class SpeciesViewController: UIViewController, UITableViewDataSource, UITableVie
         
         self.title = animals
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        // tapRecognizer, placed in viewDidLoad
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(SpeciesViewController.longPress(_:)))
+        longPressRecognizer
+        self.tableView.addGestureRecognizer(longPressRecognizer)
+        
+        
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -70,14 +77,42 @@ class SpeciesViewController: UIViewController, UITableViewDataSource, UITableVie
         // insert the new cell in the table view and show an animation
         self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
     }
-    
+    /*
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        let speciesToRemove = species[indexPath.row]
         
-        DataManager.sharedInstance.removeSpecies(species: animals, race: speciesToRemove)
+        if(editingStyle == .Delete) {
+            let speciesToRemove = species[indexPath.row]
         
-        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            DataManager.sharedInstance.removeSpecies(species: animals, race: speciesToRemove)
+        
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
+     
     }
+    */
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) ->[UITableViewRowAction]? {
+        
+        let moreRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "More", handler:{action, indexpath in
+            
+            self.onEditCall(indexPath.row)
+            
+        })
+        
+        moreRowAction.backgroundColor = UIColor(red: 0.298, green: 0.851, blue: 0.3922, alpha: 1.0);
+        
+        let deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
+            
+            let speciesToRemove = self.species[indexPath.row]
+                
+            DataManager.sharedInstance.removeSpecies(species: self.animals, race: speciesToRemove)
+                
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        })
+        
+        return [deleteRowAction, moreRowAction]
+    }
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -95,6 +130,29 @@ class SpeciesViewController: UIViewController, UITableViewDataSource, UITableVie
         navigationController?.pushViewController(detailsViewController, animated: true)
 
         
+    }
+    
+    //Called, when long press occurred
+    func longPress(longPressGestureRecognizer: UILongPressGestureRecognizer) {
+        
+        if longPressGestureRecognizer.state == UIGestureRecognizerState.Began {
+            
+            let touchPoint = longPressGestureRecognizer.locationInView(self.tableView)
+            if let indexPath = tableView.indexPathForRowAtPoint(touchPoint) {
+                self.onEditCall(indexPath.row)
+            }
+        }
+    }
+    
+    func onEditCall(row: Int) {
+        let editScreenViewController = storyboard?.instantiateViewControllerWithIdentifier("AddScreenViewController") as!AddScreenViewController
+        let race = self.species[row]
+        
+        editScreenViewController.animals = animals
+        editScreenViewController.speciesName = race
+        editScreenViewController.delegate = self
+        let navController = UINavigationController(rootViewController: editScreenViewController) // Creating a navigation controller with editScreenViewController at the root of the navigation stack.
+        self.presentViewController(navController, animated:true, completion: nil)
     }
 
 }
