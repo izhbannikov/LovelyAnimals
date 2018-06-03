@@ -23,8 +23,8 @@ class AddScreenViewController: UIViewController, UIImagePickerControllerDelegate
     
         super.viewDidLoad()
         
-    
-        
+        self.imageButton.alpha = 0
+        self.imageName.alpha = 0
     }
     
     override func viewWillAppear(animated: Bool) {
