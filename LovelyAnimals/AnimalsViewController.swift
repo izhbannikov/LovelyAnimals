@@ -24,7 +24,17 @@ class AnimalsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         self.title = "Lovely animals"
         
+        
+        // tapRecognizer, placed in viewDidLoad
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(SpeciesViewController.longPress(_:)))
+        longPressRecognizer
+        self.tableView.addGestureRecognizer(longPressRecognizer)
+        
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,7 +73,7 @@ class AnimalsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let moreRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "More", handler:{action, indexpath in
             
-            //self.onEditCall(indexPath.row)
+            self.onEditCall(indexPath.row)
             
         })
         
@@ -74,8 +84,10 @@ class AnimalsViewController: UIViewController, UITableViewDelegate, UITableViewD
             let toRemove = self.animals[indexPath.row]
             
             DataManager.sharedInstance.removeAnimal(toRemove)
-            
+            self.animals = DataManager.sharedInstance.animalsList
+            tableView.beginUpdates()
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            tableView.endUpdates()
         })
         
         return [deleteRowAction, moreRowAction]
@@ -87,12 +99,15 @@ class AnimalsViewController: UIViewController, UITableViewDelegate, UITableViewD
     {
         
         DataManager.sharedInstance.addAnimal(name)
+        self.animals.append(name)
         
         // create the index path for the last cell
-        let newIndexPath = NSIndexPath(forRow: self.animals.count - 1, inSection: 0)
+        let newIndexPath = NSIndexPath(forRow: self.animals.count-1, inSection: 0)
         
         // insert the new cell in the table view and show an animation
+        tableView.beginUpdates()
         self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        tableView.endUpdates()
         
     }
     
@@ -102,6 +117,28 @@ class AnimalsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let vc = nav.topViewController as! AddEditAnimal
         vc.delegate = self
         //}
+    }
+
+    func onEditCall(row: Int) {
+        let editScreenViewController = storyboard?.instantiateViewControllerWithIdentifier("AddEditAnimal") as!AddEditAnimal
+        let race = self.animals[row]
+        
+        editScreenViewController.animalName = race
+        editScreenViewController.delegate = self
+        let navController = UINavigationController(rootViewController: editScreenViewController) // Creating a navigation controller with editScreenViewController at the root of the navigation stack.
+        self.presentViewController(navController, animated:true, completion: nil)
+    }
+    
+    //Called, when long press occurred
+    func longPress(longPressGestureRecognizer: UILongPressGestureRecognizer) {
+        
+        if longPressGestureRecognizer.state == UIGestureRecognizerState.Began {
+            
+            let touchPoint = longPressGestureRecognizer.locationInView(self.tableView)
+            if let indexPath = tableView.indexPathForRowAtPoint(touchPoint) {
+                self.onEditCall(indexPath.row)
+            }
+        }
     }
 
 

@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class AddEditAnimal: UIViewController {
+class AddEditAnimal: UIViewController, UINavigationControllerDelegate {
     var animalName: String?
     var delegate:AddEditAnimalDelegate! = nil
     @IBOutlet var tfAnimalName: UITextField!

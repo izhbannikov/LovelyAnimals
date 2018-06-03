@@ -101,7 +101,7 @@ class DataManager {
     }
     
     func addAnimal(name: String) {
-        animals[name] = []
+        self.animals[name] = []
         saveData()
     }
     
