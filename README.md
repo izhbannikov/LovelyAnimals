@@ -20,4 +20,9 @@ The app also stores your data between app sessions with NSData model.
 * Develop adding pictures functionality for each animal/species
 * Add thubmnails for each animal/species
 
+# Requiremets
+
+* Xcode version: 7.3.1 (7D1014) - I used this version for development, did not tested on later versions.
+* Swift version:  2.2 (swiftlang-703.0.18.8 clang-703.0.31)
+
 
