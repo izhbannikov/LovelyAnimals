@@ -98,8 +98,11 @@ class DataManager {
         userDefaults.setValue(encodedData, forKey: "animals")
         userDefaults.synchronize()
         
-        //userDefaults.setEncodedDataForKey("animals", animals)
-        //userDefaults.setValue(animals, forKey: "animals")
+    }
+    
+    func addAnimal(name: String) {
+        animals[name] = []
+        saveData()
     }
     
     func addSpecies(species inSpecies: String, newSpecies: Species) {
@@ -108,6 +111,11 @@ class DataManager {
             animals[inSpecies] = species
         }
         
+        saveData()
+    }
+    
+    func removeAnimal(inRace: String) {
+        animals.removeValueForKey(inRace)
         saveData()
     }
     

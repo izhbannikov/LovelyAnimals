@@ -21,7 +21,6 @@ class SpeciesViewController: UIViewController, UITableViewDataSource, UITableVie
         var list: [String] = []
         
         for i in 0 ..< DataManager.sharedInstance.animals[animals]!.count {
-        //for i in DataManager.sharedInstance.animals[animals].name {
             list.append(DataManager.sharedInstance.animals[animals]![i].name)
         }
         return(list)
@@ -79,22 +78,9 @@ class SpeciesViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // insert the new cell in the table view and show an animation
         self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-        //self.species.append(data.keys.first)
-        //self.species.append("aaa")
+        
     }
-    /*
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        if(editingStyle == .Delete) {
-            let speciesToRemove = species[indexPath.row]
-        
-            DataManager.sharedInstance.removeSpecies(species: animals, race: speciesToRemove)
-        
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-        }
-     
-    }
-    */
+    
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) ->[UITableViewRowAction]? {
         

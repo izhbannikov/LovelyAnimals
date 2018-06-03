@@ -38,7 +38,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mAP-Mv-fg4">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="eWh-RB-9Xv"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="eWh-RB-9Xv">
+                            <connections>
+                                <segue destination="5Ff-An-fVI" kind="presentation" id="fXI-Tj-Q8H"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="fAy-aq-UDt" id="kbv-pm-DiG"/>
@@ -154,6 +158,76 @@
                 <pinchGestureRecognizer id="OxA-u9-Q80"/>
             </objects>
             <point key="canvasLocation" x="-556" y="2689"/>
+        </scene>
+        <!--Add Edit Animal-->
+        <scene sceneID="yYU-Pl-rUL">
+            <objects>
+                <viewController storyboardIdentifier="AddEditAnimal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Hag-vK-bWA" customClass="AddEditAnimal" customModule="LovelyAnimals" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2Tc-hF-41d"/>
+                        <viewControllerLayoutGuide type="bottom" id="TjO-dW-4Kh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gbu-qP-oNI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DwS-72-c1Q">
+                                <rect key="frame" x="55" y="94" width="502" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZT-0p-sz5">
+                                <rect key="frame" x="55" y="65" width="45" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DwS-72-c1Q" firstAttribute="top" secondItem="EZT-0p-sz5" secondAttribute="bottom" constant="8" id="B89-za-lxf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="DwS-72-c1Q" secondAttribute="trailing" constant="23" id="D5U-P1-iQK"/>
+                            <constraint firstItem="DwS-72-c1Q" firstAttribute="leading" secondItem="gbu-qP-oNI" secondAttribute="leadingMargin" constant="35" id="Oj1-c3-1FM"/>
+                            <constraint firstItem="EZT-0p-sz5" firstAttribute="top" secondItem="2Tc-hF-41d" secondAttribute="bottom" constant="1" id="bzg-Fd-I6a"/>
+                            <constraint firstItem="EZT-0p-sz5" firstAttribute="leading" secondItem="gbu-qP-oNI" secondAttribute="leadingMargin" constant="35" id="imL-ap-x6K"/>
+                            <constraint firstItem="EZT-0p-sz5" firstAttribute="leading" secondItem="gbu-qP-oNI" secondAttribute="leadingMargin" constant="35" id="vjY-7n-g3C"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="N0P-hw-ebS">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="idG-bC-Rua">
+                            <connections>
+                                <action selector="cancelButtonTapped:" destination="Hag-vK-bWA" id="xWT-0T-PuN"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="W10-kY-Jtg">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="Hag-vK-bWA" id="kdE-mG-yCV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tfAnimalName" destination="DwS-72-c1Q" id="SrU-CL-cE5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NNl-Hm-fHT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1961" y="136"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8r4-uo-emb">
+            <objects>
+                <navigationController id="5Ff-An-fVI" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Llj-m8-3sd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Hag-vK-bWA" kind="relationship" relationship="rootViewController" id="mqV-iB-6GX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FKn-Ta-jyZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1119" y="136"/>
         </scene>
         <!--Add Screen View Controller-->
         <scene sceneID="Ne8-jj-8tj">

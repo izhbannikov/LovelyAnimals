@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09832CCA20C39F7500F3E838 /* AddEditAnimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09832CC920C39F7500F3E838 /* AddEditAnimal.swift */; };
 		099E491220B9194100A8DC90 /* AddScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099E491120B9194100A8DC90 /* AddScreenViewController.swift */; };
 		099E491420BA23B100A8DC90 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099E491320BA23B100A8DC90 /* WebViewController.swift */; };
 		09A805D820B680F000F583E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A805D720B680F000F583E3 /* AppDelegate.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09832CC920C39F7500F3E838 /* AddEditAnimal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditAnimal.swift; sourceTree = "<group>"; };
 		099E491120B9194100A8DC90 /* AddScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScreenViewController.swift; sourceTree = "<group>"; };
 		099E491320BA23B100A8DC90 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		09A805D420B680F000F583E3 /* LovelyAnimals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LovelyAnimals.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +112,7 @@
 				09A805D720B680F000F583E3 /* AppDelegate.swift */,
 				09A805D920B680F000F583E3 /* AnimalsViewController.swift */,
 				09A805DB20B680F000F583E3 /* Main.storyboard */,
+				09832CC920C39F7500F3E838 /* AddEditAnimal.swift */,
 				09B4CBE620BA48BB005692A3 /* SpeciesDetailsViewController.swift */,
 				09A805DE20B680F000F583E3 /* Assets.xcassets */,
 				09A805E020B680F000F583E3 /* LaunchScreen.storyboard */,
@@ -278,6 +281,7 @@
 				09A8060620B796AA00F583E3 /* DataManager.swift in Sources */,
 				09A805D820B680F000F583E3 /* AppDelegate.swift in Sources */,
 				099E491220B9194100A8DC90 /* AddScreenViewController.swift in Sources */,
+				09832CCA20C39F7500F3E838 /* AddEditAnimal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
