@@ -63,11 +63,11 @@ class AddScreenViewController: UIViewController, UIImagePickerControllerDelegate
 
 
     @IBAction func saveButtonTapped(sender_: UIBarButtonItem) {
-        if (delegate != nil) {
+        if (delegate != nil && !self.tfNewName.text!.isEmpty) {
             let sp = Species(name: tfNewName.text!, pictures: [])
             delegate?.onAddSpecies(sp)
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func loadImageButtonTapped() {
