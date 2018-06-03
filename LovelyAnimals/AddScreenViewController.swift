@@ -62,12 +62,9 @@ class AddScreenViewController: UIViewController, UIImagePickerControllerDelegate
     }
 
 
-
     @IBAction func saveButtonTapped(sender_: UIBarButtonItem) {
         if (delegate != nil) {
-            var sp = [String: [String]]()
-            sp[tfNewName.text!.capitalizedString] = []
-            sp[tfNewName.text!.capitalizedString]?.append(imageName.text!)
+            let sp = Species(name: tfNewName.text!, pictures: [])
             delegate?.onAddSpecies(sp)
         }
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -86,7 +83,8 @@ class AddScreenViewController: UIViewController, UIImagePickerControllerDelegate
         if (info[UIImagePickerControllerOriginalImage] as? UIImage) != nil {
             if let imageURL = info[UIImagePickerControllerReferenceURL] as? NSURL {
                 self.imageName.text = imageURL.path!
-            }        }
+            }
+        }
         
         dismissViewControllerAnimated(true, completion: nil)
         

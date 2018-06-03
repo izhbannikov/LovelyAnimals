@@ -8,9 +8,50 @@
 
 import Foundation
 
-class DataManager {
-    var animals: [String:[String: [String]]]
+protocol Animal {
+    var name: String { get set }
     
+}
+
+class Species: NSObject, Animal, NSCoding {
+    var pictures: [String]
+    var name : String
+    
+    init(name: String, pictures: [String]?) {
+        self.name = name
+        if pictures != nil {
+            self.pictures = pictures!
+        } else {
+            self.pictures = []
+        }
+    }
+    
+    required convenience init(coder aDecoder: NSCoder) {
+        let name = aDecoder.decodeObjectForKey("name") as! String
+        let pictures = aDecoder.decodeObjectForKey("pictures") as! [String]
+        self.init(name: name, pictures: pictures)
+    }
+    
+    func encodeWithCoder(_aCoder: NSCoder) {
+        _aCoder.encodeObject(name, forKey: "name")
+        _aCoder.encodeObject(pictures, forKey: "pictures")
+    }
+    
+    func addPicture(path: String?) {
+        if path != nil {
+            self.pictures.append(path!)
+        }
+    }
+}
+
+class DataManager {
+    var animals: [String: [Species]]
+    let defaultAnimals: [String: [Species]] = [
+        "Foxes": [Species(name: "Red fox", pictures: []), Species(name: "Gray fox", pictures: []), Species(name: "Fennec fox", pictures: []), Species(name: "Bat-eared fox", pictures: []), Species(name: "Arctic fox", pictures: [])],
+        "Wolves" : [Species(name: "Gray wolf", pictures: [])],
+        "Dogs" : [Species(name: "Spaniel", pictures: [])]
+    ]
+
     struct Static {
         static var onceToken : dispatch_once_t = 0
         static var instance : DataManager? = nil
@@ -23,45 +64,47 @@ class DataManager {
         return Static.instance!
     }
     
+    
+    
     init() {
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        if let animalsInfo = userDefaults.valueForKey("animals") as? [String:[String: [String]]] {
-            animals = animalsInfo
+        let decoded  = userDefaults.objectForKey("animals") as? NSData
+        //let decodedSpecies = NSKeyedUnarchiver.unarchiveObjectWithData(decoded) as? [String: Species]
+        if decoded != nil {
+            if let animalsInfo = NSKeyedUnarchiver.unarchiveObjectWithData(decoded!) as? [String: [Species]] {
+                self.animals = animalsInfo
+            } else {
+                self.animals = defaultAnimals
+            }
         } else {
             // add default data
-            animals = [
-                "Foxes": ["Red fox" : [], "Grey fox": [], "Fennec fox":[], "Bat-eared fox":[], "Arctic fox": []],
-                "Wolfes" : ["Grey wolf": []],
-                "Dogs" : ["Spaniel": []]
-            ]
+            self.animals = defaultAnimals
         }
     }
     
     var animalsList: [String] {
-        var list: [String] = []
-        for name in animals.keys {
-            list.append(name)
-        }
-        
-        //list.sortInPlace(<)
-        
-        return list
-    }
+            var list: [String] = []
+            for name in animals.keys {
+                list.append(name)
+            }
+            return list
     
+    }
+
     func saveData() {
         let userDefaults = NSUserDefaults.standardUserDefaults()
-        userDefaults.setValue(animals, forKey: "animals")
+        
+        let encodedData = NSKeyedArchiver.archivedDataWithRootObject(self.animals)
+        userDefaults.setValue(encodedData, forKey: "animals")
+        userDefaults.synchronize()
+        
+        //userDefaults.setEncodedDataForKey("animals", animals)
+        //userDefaults.setValue(animals, forKey: "animals")
     }
     
-    func addSpecies(species inSpecies: String, newSpecies: [String: [String]]) {
+    func addSpecies(species inSpecies: String, newSpecies: Species) {
         if var species = animals[inSpecies] {
-            if(newSpecies[newSpecies.keys.first!] != nil) {
-                species[newSpecies.keys.first!] = newSpecies[newSpecies.keys.first!]
-            } else {
-                species[newSpecies.keys.first!] = []
-            }
-            
-            //species.append(newSpecies)
+            species.append(newSpecies)
             animals[inSpecies] = species
         }
         
@@ -70,12 +113,15 @@ class DataManager {
     
     func removeSpecies(species inSpecies: String, race inRace: String) {
         if var species = animals[inSpecies] {
-            if species[inRace] != nil {
-                species.removeValueForKey(inRace)
-                animals[inSpecies] = species
-                saveData()
+            var indexToDel : Int = 0
+            for i in 0 ..< species.count {
+                if species[i].name == inRace {
+                    indexToDel = i
+                }
             }
-            
+            species.removeAtIndex(indexToDel)
+            animals[inSpecies] = species
+            saveData()
         }
     }
     

@@ -10,7 +10,7 @@ import UIKit
 
 protocol AddScreenViewControllerDelegate
 {
-    func onAddSpecies(type: [String: [String]])
+    func onAddSpecies(type: Species)
 }
 
 class SpeciesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddScreenViewControllerDelegate {
@@ -19,10 +19,12 @@ class SpeciesViewController: UIViewController, UITableViewDataSource, UITableVie
     
     var species: [String] {
         var list: [String] = []
-        for name in DataManager.sharedInstance.animals[animals]!.keys {
-            list.append(name)
+        
+        for i in 0 ..< DataManager.sharedInstance.animals[animals]!.count {
+        //for i in DataManager.sharedInstance.animals[animals].name {
+            list.append(DataManager.sharedInstance.animals[animals]![i].name)
         }
-        return list
+        return(list)
     }
     
     override func viewDidLoad() {
@@ -67,8 +69,9 @@ class SpeciesViewController: UIViewController, UITableViewDataSource, UITableVie
         //}
     }
     
-    func onAddSpecies(data: [String: [String]])
+    func onAddSpecies(data: Species)
     {
+        
         DataManager.sharedInstance.addSpecies(species: self.animals, newSpecies: data)
         
         // create the index path for the last cell
@@ -76,6 +79,8 @@ class SpeciesViewController: UIViewController, UITableViewDataSource, UITableVie
         
         // insert the new cell in the table view and show an animation
         self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        //self.species.append(data.keys.first)
+        //self.species.append("aaa")
     }
     /*
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -122,9 +127,9 @@ class SpeciesViewController: UIViewController, UITableViewDataSource, UITableVie
         let url = DataManager.urlForRace(race)
         
         detailsViewController.race = race
-        if DataManager.sharedInstance.animals[animals]![race]?.count != 0 {
+        /*if DataManager.sharedInstance.animals[animals]![race]?.count != 0 {
             detailsViewController.imageFileName = DataManager.sharedInstance.animals[animals]![race]![0]
-        }
+        }*/
         detailsViewController.url = url
         
         navigationController?.pushViewController(detailsViewController, animated: true)
