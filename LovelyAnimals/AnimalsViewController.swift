@@ -97,18 +97,19 @@ class AnimalsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func onAddAnimal(name: String)
     {
-        
         DataManager.sharedInstance.addAnimal(name)
-        self.animals.append(name)
         
-        // create the index path for the last cell
-        let newIndexPath = NSIndexPath(forRow: self.animals.count-1, inSection: 0)
+        if !self.animals.contains(name) {
+            self.animals.append(name)
         
-        // insert the new cell in the table view and show an animation
-        tableView.beginUpdates()
-        self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-        tableView.endUpdates()
+            // create the index path for the last cell
+            let newIndexPath = NSIndexPath(forRow: self.animals.count-1, inSection: 0)
         
+            // insert the new cell in the table view and show an animation
+            tableView.beginUpdates()
+            self.tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            tableView.endUpdates()
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

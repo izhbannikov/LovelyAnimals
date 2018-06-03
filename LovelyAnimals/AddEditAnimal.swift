@@ -45,10 +45,10 @@ class AddEditAnimal: UIViewController, UINavigationControllerDelegate {
     
     
     @IBAction func saveButtonTapped(sender_: UIBarButtonItem) {
-        if (delegate != nil) {
+        if (delegate != nil && !tfAnimalName.text!.isEmpty) {
             delegate?.onAddAnimal(tfAnimalName.text!)
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     
